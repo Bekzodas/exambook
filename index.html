@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div
+      class="container-fluid border-bottom d-flex justify-content-between align-items-center"
+    >
+      <div class="p-3 d-flex align-items-center gap-2">
+        <i class="fa-solid fa-magnifying-glass text-secondary"></i
+        ><input
+          type="search"
+          id="search"
+          class="border-0 fs-4 w-75"
+          placeholder="Search..."
+        />
+      </div>
+      <div>
+        <button class="btn">
+          <i class="fa-regular fa-bell fs-5"></i>
+        </button>
+        <button class="btn"><i class="fa-solid fa-user fs-5"></i></button>
+        <button class="btn">
+          <i class="fa-solid fa-chevron-down fs-5"></i>
+        </button>
+      </div>
+    </div>
+    <div class="container-fluid p-5">
+      <div class="container-fluid p-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1>Products</h1>
+
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            style="width: 150px; height: 50px"
+          >
+            + New ebook
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Add New Ebook
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body p-4">
+                  <div>
+                    <label for="Name">Name : </label>
+                    <input
+                      type="text"
+                      class="m-1"
+                      form="Name"
+                      id="bookName"
+                      placeholder=" Name..."
+                    />
+                  </div>
+                  <div>
+                    <label for="IMG">Img(url) : </label>
+                    <input
+                      type="url"
+                      class="m-1"
+                      id="bookImg"
+                      form="IMG"
+                      placeholder=" Img..."
+                    />
+                  </div>
+                  <div>
+                    <label for="price">Price : </label>
+                    <input
+                      type="number"
+                      class="m-1"
+                      id="bookPrice"
+                      form="price"
+                      placeholder="price..."
+                    />
+                  </div>
+                  <div>
+                    <label for="revenue">Sales : </label>
+                    <input
+                      type="number"
+                      class="m-1"
+                      form="sales"
+                      id="bookSales"
+                      placeholder="Sales..."
+                    />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    onclick="addNewBook()"
+                  >
+                    +Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center px-5">
+        <div>
+          <button
+            class="btn text-secondary text-secondary"
+            onclick="filters('all',1)"
+          >
+            All
+          </button>
+          <button
+            class="btn text-secondary text-secondary"
+            onclick="filters('published',2)"
+          >
+            Published
+          </button>
+          <button
+            class="btn text-secondary text-secondary"
+            onclick="filters('draft',3)"
+          >
+            Draft
+          </button>
+        </div>
+        <div>
+          <button class="btn text-secondary" onclick="mode(1)">
+            <i class="fa-solid fa-grip"></i>
+          </button>
+          <button class="btn text-secondary" onclick="mode(2)">
+            <i class="fa-solid fa-grip-vertical"></i>
+          </button>
+        </div>
+      </div>
+      <div class="container-fluid p-5">
+        <div class="row" id="result"></div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./ebookData.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
